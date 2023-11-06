@@ -27,3 +27,8 @@ SELECT_ENTERTAINMENT = "SELECT * FROM entertainment WHERE name = ? AND price = ?
 SELECT_UTILITIES = "SELECT * FROM utilities WHERE name = ? AND price = ?;"
 SELECT_OTHER = "SELECT * FROM other WHERE name = ? AND price = ?;"
 
+DELETE_GROCERIES = "DELETE FROM groceries WHERE name = ? AND price = ?;"
+DELETE_TRANSPORTATION  = "DELETE FROM transportation WHERE name = ? AND price = ?;"
+DELETE_ENTERTAINMENT= "DELETE FROM entertainment WHERE name = ? AND price = ?;"
+DELETE_UTILITIES = "DELETE FROM utilities WHERE name = ? AND price = ?;"
+DELETE_OTHER = "DELETE FROM other WHERE name = ? AND price = ?;"
