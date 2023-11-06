@@ -15,3 +15,8 @@ INSERT_ENTERTAINMENT = "INSERT INTO entertainment (name,price,date) VALUES(?, ?,
 INSERT_UTILITIES = "INSERT INTO utilities (name,price,date) VALUES(?, ?, ?);"
 INSERT_OTHER = "INSERT INTO other (name,price,date) VALUES(?, ?, ?);"
 
+SELECT_ALL1 = "SELECT * FROM  groceries;"
+SELECT_ALL2 = "SELECT * FROM  transportation;"
+SELECT_ALL3 = "SELECT * FROM  entertainment;"
+SELECT_ALL4 = "SELECT * FROM  utilities;"
+SELECT_ALL4 = "SELECT * FROM  other;"
