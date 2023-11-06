@@ -41,4 +41,44 @@ def create_tables():
         for table in tables_list:
             conn.execute(table)
 
+#insert functions
 
+def insert_groceries(name, price, date):
+    conn=sqlite3.connect('expenses.db')
+    with conn:
+        c=conn.cursor()
+        c.execute(INSERT_GROCERIES,(name, price, date))
+        conn.commit()
+    c.cloe()
+
+def insert_transportation(name, price, date):
+    conn=sqlite3.connect('expenses.db')
+    with conn:
+        c=conn.cursor()
+        c.execute(INSERT_TRANSPORTATION,(name, price, date))
+        conn.commit()
+        c.close()
+
+def insert_entertainment(name, price, date):
+    conn=sqlite3.connect('expenses.db')
+    with conn:
+        c=conn.cursor()
+        c.execute(INSERT_ENTERTAINMENT,(name, price, date))
+        conn.commit()
+        c.close()
+
+def insert_utilities(name, price, date):
+    conn=sqlite3.connect('expenses.db')
+    with conn:
+        c=conn.cursor()
+        c.execute(INSERT_UTILITIES,(name, price, date))
+        conn.commit()
+        c.close()
+
+def insert_other(name, price, date):
+    conn=sqlite3.connect('expenses.db')
+    with conn:
+        c=conn.cursor()
+        c.execute(INSERT_OTHER,(name, price, date))
+        conn.commit()
+        c.close()
