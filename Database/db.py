@@ -32,3 +32,5 @@ DELETE_TRANSPORTATION  = "DELETE FROM transportation WHERE name = ? AND price = 
 DELETE_ENTERTAINMENT= "DELETE FROM entertainment WHERE name = ? AND price = ?;"
 DELETE_UTILITIES = "DELETE FROM utilities WHERE name = ? AND price = ?;"
 DELETE_OTHER = "DELETE FROM other WHERE name = ? AND price = ?;"
+
+
