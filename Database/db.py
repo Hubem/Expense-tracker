@@ -20,3 +20,10 @@ SELECT_ALL2 = "SELECT * FROM  transportation;"
 SELECT_ALL3 = "SELECT * FROM  entertainment;"
 SELECT_ALL4 = "SELECT * FROM  utilities;"
 SELECT_ALL4 = "SELECT * FROM  other;"
+
+SELECT_GROCERIES = "SELECT * FROM groceries WHERE name = ? AND price = ?;"
+SELECT_TRANSPORTATION = "SELECT * FROM transportation WHERE name = ? AND price = ?;"
+SELECT_ENTERTAINMENT = "SELECT * FROM entertainment WHERE name = ? AND price = ?;"
+SELECT_UTILITIES = "SELECT * FROM utilities WHERE name = ? AND price = ?;"
+SELECT_OTHER = "SELECT * FROM other WHERE name = ? AND price = ?;"
+
