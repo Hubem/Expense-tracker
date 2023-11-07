@@ -129,3 +129,70 @@ def delete_other(good, price):
         c.execute(DELETE_OTHER, (good, price))
         conn.commit()
         c.close()
+
+
+#select all functions
+
+def select_all_groceries():
+    conn = sqlite3.connect('expenses.db')
+    with conn:
+        c = conn.cursor()
+        c.execute(SELECT_ALL1)
+        list = c.fetchall()
+        c.close()
+        output = ''
+        for x in list:
+            output = output + str(x[1]) + ' ' + str(x[2]) + ' ' + str(x[3]) + '\n'
+        return output
+        
+
+def select_all_transportation():
+    conn = sqlite3.connect('expenses.db')
+    with conn:
+        c = conn.cursor()
+        c.execute(SELECT_ALL2)
+        list = c.fetchall()
+        c.close()
+        output = ''
+        for x in list:
+            output = output + str(x[1]) + ' ' + str(x[2]) + ' ' + str(x[3]) + '\n'
+        return output
+    
+
+def select_all_entertainment():
+    conn = sqlite3.connect('expenses.db')
+    with conn:
+        c = conn.cursor()
+        c.execute(SELECT_ALL3)
+        list = c.fetchall()
+        c.close()
+        output = ''
+        for x in list:
+            output = output + str(x[1]) + ' ' + str(x[2]) + ' ' + str(x[3]) + '\n'
+        return output
+    
+
+def select_all_utilities():
+    conn = sqlite3.connect('expenses.db')
+    with conn:
+        c = conn.cursor()
+        c.execute(SELECT_ALL4)
+        list = c.fetchall()
+        c.close()
+        output = ''
+        for x in list:
+            output = output + str(x[1]) + ' ' + str(x[2]) + ' ' + str(x[3]) + '\n'
+        return output
+    
+
+def select_all_other():
+    conn = sqlite3.connect('expenses.db')
+    with conn:
+        c = conn.cursor()
+        c.execute(SELECT_ALL4)
+        list = c.fetchall()
+        c.close()
+        output = ''
+        for x in list:
+            output = output + str(x[1]) + ' ' + str(x[2]) + ' ' + str(x[3]) + '\n'
+        return output
