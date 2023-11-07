@@ -196,3 +196,70 @@ def select_all_other():
         for x in list:
             output = output + str(x[1]) + ' ' + str(x[2]) + ' ' + str(x[3]) + '\n'
         return output
+    
+
+#select specific funcions
+
+def select_groceries(good, price):
+    conn = sqlite3.connect('expenses.db')
+    with conn:
+        c = conn.cursor()
+        c.execute(SELECT_GROCERIES, (good, price))
+        list = c.fetchall()
+        c.close()
+        output = ''
+        for x in list:
+            output = output + str(x[1]) + ' ' + str(x[2]) + ' ' + str(x[3]) + '\n'
+        return output
+    
+
+def select_transportation(good, price):
+    conn = sqlite3.connect('expenses.db')
+    with conn:
+        c = conn.cursor()
+        c.execute(SELECT_TRANSPORTATION, (good, price))
+        list = c.fetchall()
+        c.close()
+        output = ''
+        for x in list:
+            output = output + str(x[1]) + ' ' + str(x[2]) + ' ' + str(x[3]) + '\n'
+        return output
+    
+
+def select_entertainment(good, price):
+    conn = sqlite3.connect('expenses.db')
+    with conn:
+        c = conn.cursor()
+        c.execute(SELECT_ENTERTAINMENT, (good, price))
+        list = c.fetchall()
+        c.close()
+        output = ''
+        for x in list:
+            output = output + str(x[1]) + ' ' + str(x[2]) + ' ' + str(x[3]) + '\n'
+        return output
+    
+
+def select_utilities(good, price):
+    conn = sqlite3.connect('expenses.db')
+    with conn:
+        c = conn.cursor()
+        c.execute(SELECT_UTILITIES, (good, price))
+        list = c.fetchall()
+        c.close()
+        output = ''
+        for x in list:
+            output = output + str(x[1]) + ' ' + str(x[2]) + ' ' + str(x[3]) + '\n'
+        return output
+    
+
+def select_other(good, price):
+    conn = sqlite3.connect('expenses.db')
+    with conn:
+        c = conn.cursor()
+        c.execute(SELECT_OTHER, (good, price))
+        list = c.fetchall()
+        c.close()
+        output = ''
+        for x in list:
+            output = output + str(x[1]) + ' ' + str(x[2]) + ' ' + str(x[3]) + '\n'
+        return output
