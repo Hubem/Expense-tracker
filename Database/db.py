@@ -82,3 +82,50 @@ def insert_other(name, price, date):
         c.execute(INSERT_OTHER,(name, price, date))
         conn.commit()
         c.close()
+
+
+#delete functions
+
+def delete_groceries(good, price):
+    conn = sqlite3.connect('expenses.db')
+    with conn:
+        c = conn.cursor()
+        c.execute(DELETE_GROCERIES, (good, price))
+        conn.commit()
+        c.close()
+
+
+def delete_transportation(good, price):
+    conn = sqlite3.connect('expenses.db')
+    with conn:
+        c = conn.cursor()
+        c.execute(DELETE_TRANSPORTATION, (good, price))
+        conn.commit()
+        c.close()
+
+
+def delete_entertainment(good, price):
+    conn = sqlite3.connect('expenses.db')
+    with conn:
+        c = conn.cursor()
+        c.execute(DELETE_ENTERTAINMENT, (good, price))
+        conn.commit()
+        c.close()
+
+
+def delete_utilities(good, price):
+    conn = sqlite3.connect('expenses.db')
+    with conn:
+        c = conn.cursor()
+        c.execute(DELETE_UTILITIES, (good, price))
+        conn.commit()
+        c.close()
+
+
+def delete_other(good, price):
+    conn = sqlite3.connect('expenses.db')
+    with conn:
+        c = conn.cursor()
+        c.execute(DELETE_OTHER, (good, price))
+        conn.commit()
+        c.close()
