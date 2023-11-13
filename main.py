@@ -6,6 +6,13 @@ class ExpenseTracker:
         self.frame = Frame(master)
         self.frame.pack()
 
+    def delete(self, boxaile):
+        myLabel=Label(boxaile, text="The chosen value was successfully deleted")
+        myLabel.grid(row=4,column=0)
+
+
+    
+
 def main():
     root = Tk()
     root.geometry('250x200')
