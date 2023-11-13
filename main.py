@@ -16,6 +16,12 @@ class ExpenseTracker:
         delete=database(name,price)
         return delete
     
+    def inserted(self, boxaile):
+        myLabel=Label(boxaile, text="The value has been inserted")
+        myLabel.grid(row=4,column=0)
+
+
+
 
 def main():
     root = Tk()
