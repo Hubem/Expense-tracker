@@ -19,7 +19,7 @@ SELECT_ALL1 = "SELECT * FROM  groceries;"
 SELECT_ALL2 = "SELECT * FROM  transportation;"
 SELECT_ALL3 = "SELECT * FROM  entertainment;"
 SELECT_ALL4 = "SELECT * FROM  utilities;"
-SELECT_ALL4 = "SELECT * FROM  other;"
+SELECT_ALL5 = "SELECT * FROM  other;"
 
 SELECT_GROCERIES = "SELECT * FROM groceries WHERE name = ? AND price = ?;"
 SELECT_TRANSPORTATION = "SELECT * FROM transportation WHERE name = ? AND price = ?;"
