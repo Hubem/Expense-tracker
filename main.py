@@ -10,7 +10,11 @@ class ExpenseTracker:
         myLabel=Label(boxaile, text="The chosen value was successfully deleted")
         myLabel.grid(row=4,column=0)
 
-
+    def delete_expense(self, database,val1, val2):
+        name=val1.get()
+        price=val2.get()
+        delete=database(name,price)
+        return delete
     
 
 def main():
