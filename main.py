@@ -21,7 +21,12 @@ class ExpenseTracker:
         myLabel=Label(boxaile, text="The value has been inserted")
         myLabel.grid(row=4,column=0)
 
-
+    def insert(self, database, val1, val2, val3):
+        name=val1.get()
+        price=val2.get()
+        date=val3.get()
+        insertion=database(name, price, date)
+        return insertion
 
 
 def main():
