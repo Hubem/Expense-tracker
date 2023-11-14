@@ -49,7 +49,7 @@ def insert_groceries(name, price, date):
         c=conn.cursor()
         c.execute(INSERT_GROCERIES,(name, price, date))
         conn.commit()
-    c.cloe()
+    c.close()
 
 def insert_transportation(name, price, date):
     conn=sqlite3.connect('expenses.db')
