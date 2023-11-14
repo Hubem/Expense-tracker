@@ -36,7 +36,7 @@ DELETE_OTHER = "DELETE FROM other WHERE name = ? AND price = ?;"
 tables_list = [CREATE_GROCERIES,CREATE_TRANSPORTATION,CREATE_ENTERTAINMENT,CREATE_UTILITIES,CREATE_OTHER]
 
 def create_tables():
-    conn = sqlite3.connect('expenses.db')
+    conn = sqlite3.connect('Adatbazis/expenses.db')
     with conn:
         for table in tables_list:
             conn.execute(table)
