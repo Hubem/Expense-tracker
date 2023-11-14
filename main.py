@@ -41,8 +41,9 @@ def main():
 
     type_menu = Menu(menubar, tearoff=False)
     type_menu.add_command(label='Groceries expenses')
-    type_menu.add_command(label="Household expenses")
+    type_menu.add_command(label="Transportation expenses")
     type_menu.add_command(label="Entertainment expenses")
+    type_menu.add_command(label="Utilities expenses")
     type_menu.add_command(label="Other expenses")
 
     exit_menu = Menu(menubar, tearoff=0)
