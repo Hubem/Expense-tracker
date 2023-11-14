@@ -1,3 +1,4 @@
+
 from tkinter import *
 from tkinter.ttk import *
 
@@ -5,6 +6,11 @@ class ExpenseTracker:
     def __init__(self, master):
         self.frame = Frame(master)
         self.frame.pack()
+
+
+    def display_all(self,database):
+        select_all = database
+        return select_all
 
     def delete(self, boxaile):
         myLabel=Label(boxaile, text="The chosen value was successfully deleted")
