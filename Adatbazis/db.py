@@ -44,7 +44,7 @@ def create_tables():
 #insert functions
 
 def insert_groceries(name, price, date):
-    conn=sqlite3.connect('expenses.db')
+    conn=sqlite3.connect('Adatbazis/expenses.db')
     with conn:
         c=conn.cursor()
         c.execute(INSERT_GROCERIES,(name, price, date))
@@ -52,7 +52,7 @@ def insert_groceries(name, price, date):
     c.close()
 
 def insert_transportation(name, price, date):
-    conn=sqlite3.connect('expenses.db')
+    conn=sqlite3.connect('Adatbazis/expenses.db')
     with conn:
         c=conn.cursor()
         c.execute(INSERT_TRANSPORTATION,(name, price, date))
@@ -60,7 +60,7 @@ def insert_transportation(name, price, date):
         c.close()
 
 def insert_entertainment(name, price, date):
-    conn=sqlite3.connect('expenses.db')
+    conn=sqlite3.connect('Adatbazis/expenses.db')
     with conn:
         c=conn.cursor()
         c.execute(INSERT_ENTERTAINMENT,(name, price, date))
@@ -68,7 +68,7 @@ def insert_entertainment(name, price, date):
         c.close()
 
 def insert_utilities(name, price, date):
-    conn=sqlite3.connect('expenses.db')
+    conn=sqlite3.connect('Adatbazis/expenses.db')
     with conn:
         c=conn.cursor()
         c.execute(INSERT_UTILITIES,(name, price, date))
@@ -76,7 +76,7 @@ def insert_utilities(name, price, date):
         c.close()
 
 def insert_other(name, price, date):
-    conn=sqlite3.connect('expenses.db')
+    conn=sqlite3.connect('Adatbazis/expenses.db')
     with conn:
         c=conn.cursor()
         c.execute(INSERT_OTHER,(name, price, date))
@@ -87,7 +87,7 @@ def insert_other(name, price, date):
 #delete functions
 
 def delete_groceries(good, price):
-    conn = sqlite3.connect('expenses.db')
+    conn = sqlite3.connect('Adatbazis/expenses.db')
     with conn:
         c = conn.cursor()
         c.execute(DELETE_GROCERIES, (good, price))
@@ -96,7 +96,7 @@ def delete_groceries(good, price):
 
 
 def delete_transportation(good, price):
-    conn = sqlite3.connect('expenses.db')
+    conn = sqlite3.connect('Adatbazis/expenses.db')
     with conn:
         c = conn.cursor()
         c.execute(DELETE_TRANSPORTATION, (good, price))
@@ -105,7 +105,7 @@ def delete_transportation(good, price):
 
 
 def delete_entertainment(good, price):
-    conn = sqlite3.connect('expenses.db')
+    conn = sqlite3.connect('Adatbazis/expenses.db')
     with conn:
         c = conn.cursor()
         c.execute(DELETE_ENTERTAINMENT, (good, price))
@@ -114,7 +114,7 @@ def delete_entertainment(good, price):
 
 
 def delete_utilities(good, price):
-    conn = sqlite3.connect('expenses.db')
+    conn = sqlite3.connect('Adatbazis/expenses.db')
     with conn:
         c = conn.cursor()
         c.execute(DELETE_UTILITIES, (good, price))
@@ -123,7 +123,7 @@ def delete_utilities(good, price):
 
 
 def delete_other(good, price):
-    conn = sqlite3.connect('expenses.db')
+    conn = sqlite3.connect('Adatbazis/expenses.db')
     with conn:
         c = conn.cursor()
         c.execute(DELETE_OTHER, (good, price))
@@ -134,7 +134,7 @@ def delete_other(good, price):
 #select all functions
 
 def select_all_groceries():
-    conn = sqlite3.connect('expenses.db')
+    conn = sqlite3.connect('Adatbazis/expenses.db')
     with conn:
         c = conn.cursor()
         c.execute(SELECT_ALL1)
@@ -147,7 +147,7 @@ def select_all_groceries():
         
 
 def select_all_transportation():
-    conn = sqlite3.connect('expenses.db')
+    conn = sqlite3.connect('Adatbazis/expenses.db')
     with conn:
         c = conn.cursor()
         c.execute(SELECT_ALL2)
@@ -160,7 +160,7 @@ def select_all_transportation():
     
 
 def select_all_entertainment():
-    conn = sqlite3.connect('expenses.db')
+    conn = sqlite3.connect('Adatbazis/expenses.db')
     with conn:
         c = conn.cursor()
         c.execute(SELECT_ALL3)
@@ -173,7 +173,7 @@ def select_all_entertainment():
     
 
 def select_all_utilities():
-    conn = sqlite3.connect('expenses.db')
+    conn = sqlite3.connect('Adatbazis/expenses.db')
     with conn:
         c = conn.cursor()
         c.execute(SELECT_ALL4)
@@ -186,7 +186,7 @@ def select_all_utilities():
     
 
 def select_all_other():
-    conn = sqlite3.connect('expenses.db')
+    conn = sqlite3.connect('Adatbazis/expenses.db')
     with conn:
         c = conn.cursor()
         c.execute(SELECT_ALL4)
@@ -201,7 +201,7 @@ def select_all_other():
 #select specific funcions
 
 def select_groceries(good, price):
-    conn = sqlite3.connect('expenses.db')
+    conn = sqlite3.connect('Adatbazis/expenses.db')
     with conn:
         c = conn.cursor()
         c.execute(SELECT_GROCERIES, (good, price))
@@ -214,7 +214,7 @@ def select_groceries(good, price):
     
 
 def select_transportation(good, price):
-    conn = sqlite3.connect('expenses.db')
+    conn = sqlite3.connect('Adatbazis/expenses.db')
     with conn:
         c = conn.cursor()
         c.execute(SELECT_TRANSPORTATION, (good, price))
@@ -227,7 +227,7 @@ def select_transportation(good, price):
     
 
 def select_entertainment(good, price):
-    conn = sqlite3.connect('expenses.db')
+    conn = sqlite3.connect('Adatbazis/expenses.db')
     with conn:
         c = conn.cursor()
         c.execute(SELECT_ENTERTAINMENT, (good, price))
@@ -240,7 +240,7 @@ def select_entertainment(good, price):
     
 
 def select_utilities(good, price):
-    conn = sqlite3.connect('expenses.db')
+    conn = sqlite3.connect('Adatbazis/expenses.db')
     with conn:
         c = conn.cursor()
         c.execute(SELECT_UTILITIES, (good, price))
@@ -253,7 +253,7 @@ def select_utilities(good, price):
     
 
 def select_other(good, price):
-    conn = sqlite3.connect('expenses.db')
+    conn = sqlite3.connect('Adatbazis/expenses.db')
     with conn:
         c = conn.cursor()
         c.execute(SELECT_OTHER, (good, price))
