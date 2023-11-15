@@ -16,10 +16,9 @@ class ExpenseTracker:
         myLabel=Label(boxaile, text="The chosen value was successfully deleted")
         myLabel.grid(row=4,column=0)
 
-    def delete_expense(self, database,val1, val2, val3):
+    def delete_expense(self, database,val1, val2):
         name=val1.get()
         price=val2.get()
-        date=val3.get()
         delete=database(name,price)
         return delete
     
@@ -55,6 +54,9 @@ class ExpenseTracker:
         ButtonInsert = Button(self.frame,text="Insert values",command= lambda: (self.insert(db.insert_groceries,entry_name,entry_price,entry_date),self.inserted(self.frame)))
         ButtonInsert.grid(row=1,column=2)
 
+        ButtonDelete = Button(self.frame,text="Delete Groceries",command= lambda: (self.delete_expense(db.delete_groceries,entry_name,entry_price),self.delete(self.frame)))
+        ButtonDelete.grid(row=2,column=2)
+
 
     def transportation(self):
         for widget in self.frame.winfo_children():
@@ -73,7 +75,7 @@ class ExpenseTracker:
 
 def main():
     root = Tk()
-    root.geometry('250x200')
+    root.geometry('800x500')
     root.title("Expense Tracker")
     tracker = ExpenseTracker(root)
     db.create_tables()
