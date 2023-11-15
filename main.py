@@ -69,9 +69,16 @@ class ExpenseTracker:
         label_price = Label(self.frame, text="Price").grid(row=2, column=0, sticky=W, pady=2)
         label_date = Label(self.frame, text="Date of pruchase").grid(row=3, column=0, sticky=W, pady=2)
 
-        entry_name = Entry(self.frame).grid(row=1, column=1, sticky=W, pady=2)
-        entry_price = Entry(self.frame).grid(row=2, column=1, sticky=W, pady=2)
-        entry_date = Entry(self.frame).grid(row=3, column=1, sticky=W, pady=2)
+        entry_name = Entry(self.frame)
+        entry_name.grid(row=1, column=1, sticky=W, pady=2)
+        entry_price = Entry(self.frame)
+        entry_price.grid(row=2, column=1, sticky=W, pady=2)
+        entry_date = Entry(self.frame)
+        entry_date.grid(row=3, column=1, sticky=W, pady=2)
+
+        ButtonInsert = Button(self.frame,text="Insert values",command= lambda: (self.insert(db.insert_transportation,entry_name,entry_price,entry_date),self.inserted(self.frame)))
+        ButtonInsert.grid(row=1,column=2)
+        
 
 def main():
     root = Tk()
