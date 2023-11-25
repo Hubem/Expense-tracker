@@ -3,6 +3,7 @@ import datetime
 
 now = datetime.datetime.utcnow()
 
+
 CREATE_GROCERIES = "CREATE TABLE IF NOT EXISTS groceries (id INTEGER PRIMARY KEY,name TEXT,price INTEGER,date DATE);"
 CREATE_TRANSPORTATION = "CREATE TABLE IF NOT EXISTS transportation (id INTEGER PRIMARY KEY,name TEXT,price INTEGER,date DATE);"
 CREATE_ENTERTAINMENT = "CREATE TABLE IF NOT EXISTS entertainment (id INTEGER PRIMARY KEY,name TEXT,price INTEGER,date DATE);"
@@ -33,6 +34,8 @@ DELETE_ENTERTAINMENT= "DELETE FROM entertainment WHERE name = ? AND price = ?;"
 DELETE_UTILITIES = "DELETE FROM utilities WHERE name = ? AND price = ?;"
 DELETE_OTHER = "DELETE FROM other WHERE name = ? AND price = ?;"
 
+DELETE_GROCERIES_BY_ID = "DELETE FROM groceries WHERE id = ?;"
+
 tables_list = [CREATE_GROCERIES,CREATE_TRANSPORTATION,CREATE_ENTERTAINMENT,CREATE_UTILITIES,CREATE_OTHER]
 
 def create_tables():
@@ -50,6 +53,8 @@ def insert_groceries(name, price, date):
         c.execute(INSERT_GROCERIES,(name, price, date))
         conn.commit()
     c.close()
+
+
 
 def insert_transportation(name, price, date):
     conn=sqlite3.connect('Adatbazis/expenses.db')
@@ -91,6 +96,14 @@ def delete_groceries(good, price):
     with conn:
         c = conn.cursor()
         c.execute(DELETE_GROCERIES, (good, price))
+        conn.commit()
+        c.close()
+
+def delete_gro_by_id(id):
+    conn = sqlite3.connect('Adatbazis/expenses.db')
+    with conn:
+        c = conn.cursor()
+        c.execute(DELETE_GROCERIES_BY_ID,(id,))
         conn.commit()
         c.close()
 
@@ -153,6 +166,8 @@ def select_all_gro():
         rows = c.fetchall()
         c.close()
         return rows
+
+
         
 
 def select_all_transportation():

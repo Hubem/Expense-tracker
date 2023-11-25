@@ -6,6 +6,7 @@ class ExpenseTracker:
     def __init__(self, master):
         self.frame = Frame(master)
         self.frame.pack()
+        self.tracker = self
 
 
     def display_all(self,database):
@@ -16,11 +17,10 @@ class ExpenseTracker:
         myLabel=Label(boxaile, text="The chosen value was successfully deleted")
         myLabel.grid(row=4,column=0)
 
-    def delete_expense(self, database,val1, val2):
-        name=val1.get()
-        price=val2.get()
-        delete=database(name,price)
+    def delete_expense(self, database,name, price):
+        delete = database(name, price)
         return delete
+    
     
     def inserted(self, boxaile):
         myLabel=Label(boxaile, text="The value has been inserted")
@@ -33,21 +33,39 @@ class ExpenseTracker:
         insertion=database(name, price, date)
         return insertion
     
-    def show_expenses(self,database):
+    def show_expenses(self,database):   
         expenses = database()
-        expense_list = Listbox(self.frame, selectmode=SINGLE)
-        scroll_bar = Scrollbar(self.frame, orient='vertical', command=expense_list.yview)
+        expense_list = Listbox(self.frame,selectmode=SINGLE)
+        scroll_bar = Scrollbar(self.frame,orient='vertical',command=expense_list.yview)
         expense_list.config(yscrollcommand=scroll_bar.set)
 
         for expense in expenses:
-            expense_list.insert(END, f"{expense[1]} - {expense[2]} - {expense[3]}")
+            expense_list.insert(END,f"{expense[0]} - {expense[1]} - {expense[2]}")
 
-        expense_list.grid(row=4, column=0, columnspan=2)
-        scroll_bar.grid(row=4, column=2)
+        expense_list.grid(row=4,column=0,columnspan=2)
+        scroll_bar.grid(row=4,column=2)
 
-        delete_button = Button(self.frame, text='Delete the Selected', command=lambda: self.delete_selected(database, expense_list))
-        delete_button.grid(row=5, column=0, columnspan=2)
+        delete_button = Button(self.frame,text='Delete the Selected',command= lambda: self.delete_selected(database,expense_list))
+        delete_button.grid(row=5,column=0,columnspan=2  )
+    
+    
+    def delete_selected(self,database,expense_list):
+        selected = expense_list.curselection()
 
+        if selected:
+            id_to_delete = int(expense_list.get(selected[0]).split()[0])
+            db.delete_gro_by_id(id_to_delete)
+        self.show_expenses(database)
+
+
+        
+
+
+    
+    
+
+    
+    
 
 
     def groceries(self):
@@ -71,8 +89,11 @@ class ExpenseTracker:
         ButtonInsert = Button(self.frame,text="Insert values",command= lambda: (self.insert(db.insert_groceries,entry_name,entry_price,entry_date),self.inserted(self.frame)))
         ButtonInsert.grid(row=1,column=2)
 
-        ButtonDelete = Button(self.frame,text="Delete Groceries",command= lambda: (self.show_expenses(db.select_all_gro)))
-        ButtonDelete.grid(row=2,column=2)
+        ButtonDelete = Button(self.frame, text="Delete Groceries", command=lambda: self.show_expenses(db.select_all_gro))
+        ButtonDelete.grid(row=2, column=2)
+
+    
+
 
 
     def transportation(self):
