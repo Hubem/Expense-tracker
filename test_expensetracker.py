@@ -37,6 +37,17 @@ class TestExpenseTracker(unittest.TestCase):
         # Check that the Listbox was created
         self.assertIsInstance(self.tracker.expense_list, Listbox)
 
+    def test_delete_selected_no_selection(self):
+       
+     mock_listbox = MagicMock()
+     mock_listbox.curselection.return_value = ()
+     self.tracker.expense_list = mock_listbox
+
+    
+     self.tracker.delete_selected(self.mock_db, mock_listbox)
+
+     
+     self.mock_db.delete_gro_by_id.assert_not_called()
 
 if __name__ == '__main__':
     unittest.main()
