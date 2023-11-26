@@ -42,10 +42,8 @@ class TestExpenseTracker(unittest.TestCase):
      mock_listbox = MagicMock()
      mock_listbox.curselection.return_value = ()
      self.tracker.expense_list = mock_listbox
-
     
      self.tracker.delete_selected(self.mock_db, mock_listbox)
-
      
      self.mock_db.delete_gro_by_id.assert_not_called()
 
