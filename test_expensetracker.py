@@ -37,6 +37,27 @@ class TestExpenseTracker(unittest.TestCase):
         # Check that the Listbox was created
         self.assertIsInstance(self.tracker.expense_list, Listbox)
 
+
+    def test_delete_groceries(self):
+        # Insert value
+        entry_name = Entry(self.tracker.frame)  # Create a mock Entry widget for testing
+        entry_name.insert(0, 'Sample_Grocery')  # Set the value in the mock Entry widget
+        entry_price = Entry(self.tracker.frame)
+        entry_price.insert(0, 10)
+        entry_date = Entry(self.tracker.frame)
+        entry_date.insert(0, '2023-01-01')
+
+        # Call insert with the mock Entry widgets
+        self.tracker.insert(self.mock_db.insert_groceries, entry_name, entry_price, entry_date)
+
+        # Call delete_groceries
+        self.tracker.delete_expense(self.mock_db,entry_name.get(), entry_price.get())
+
+        # Check if the value is no longer present in the database
+        expenses_after_delete = self.mock_db.show_expenses(self.mock_db)
+        self.assertNotIn('Sample_Grocery - 10 - 2023-01-01', expenses_after_delete)
+
+
     def test_delete_selected_no_selection(self):
        
      mock_listbox = MagicMock()
