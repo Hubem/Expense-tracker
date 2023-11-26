@@ -10,7 +10,7 @@ from main import ExpenseTracker
 import unittest
 from unittest.mock import MagicMock
 
-from Adatbazis import db  # Make sure you have the necessary imports
+from Adatbazis import db  
 
 class TestExpenseTracker(unittest.TestCase):
 
