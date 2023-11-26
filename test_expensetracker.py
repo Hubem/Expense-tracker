@@ -38,7 +38,7 @@ class TestExpenseTracker(unittest.TestCase):
         self.assertIsInstance(self.tracker.expense_list, Listbox)
 
 
-    def test_delete_groceries(self):
+    def test_delete_expense(self):
         # Insert value
         entry_name = Entry(self.tracker.frame)  # Create a mock Entry widget for testing
         entry_name.insert(0, 'Sample_Grocery')  # Set the value in the mock Entry widget
