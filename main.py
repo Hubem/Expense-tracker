@@ -9,8 +9,8 @@ class ExpenseTracker:
         self.frame.pack()
         self.tracker = self
 
-    def center_button(self, text, command):
-        button = customtkinter.CTkButton(self.frame, text=text, command=command,border_width=2,bg_color='transparent')
+    def center_button(self, text, command,image,compound):
+        button = customtkinter.CTkButton(self.frame, text=text, command=command,border_width=2,bg_color='transparent',image=image,compound=compound)
         button.pack(side='left', padx=10)
         
 
@@ -297,9 +297,7 @@ def main():
     customtkinter.set_appearance_mode('dark')
     customtkinter.set_default_color_theme('blue')
 
-    #Menubar
-    menubar = Menu(root)
-    root.config(menu=menubar)
+  
 
     minecart = PhotoImage(file="images/pngegg.png")
     firewok = PhotoImage(file="images/firework.png")
@@ -308,18 +306,12 @@ def main():
     resizedMine = minecart.subsample(int(minecart.width()/width),int(minecart.height()/height))
     resizedFire = firewok.subsample(int(firewok.width()/width),int(firewok.height()/height))
 
-    type_menu = Menu(menubar, tearoff=False)
-    type_menu.add_command(label='Groceries expenses', command=tracker.groceries)
-    type_menu.add_command(label='Transportation expenses', command=tracker.transportation,image=resizedMine,compound="left")
-    type_menu.add_command(label="Entertainment expenses",command=tracker.entertainment, image=resizedFire,compound="left")
-    type_menu.add_command(label="Utilities expenses", command=tracker.utilities)
-    type_menu.add_command(label="Other expenses", command=tracker.other)
+    tracker.center_button('Groceries expenses',tracker.groceries,image=resizedMine,compound="left")
+    tracker.center_button('Transportation expenses',tracker.transportation,image=resizedMine,compound="left")
+    tracker.center_button("Entertainment expenses",tracker.entertainment, image=resizedFire,compound="left")
+    tracker.center_button("Utilities expenses",tracker.utilities,image=resizedMine,compound="left")
+    tracker.center_button("Other expenses",tracker.other,image=resizedMine,compound="left")
 
-    #exit_menu = Menu(menubar, tearoff=0)
-    #exit_menu.add_command(label='Exit', command=root.destroy)
-
-    #menubar.add_cascade(label="Types", menu=type_menu)
-    #menubar.add_cascade(label="Other", menu=exit_menu)
     
 
     root.mainloop()
