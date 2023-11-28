@@ -2,6 +2,7 @@ from Adatbazis import db
 from tkinter import *
 from tkinter.ttk import *
 import customtkinter
+import re
 
 class ExpenseTracker:
     def __init__(self, master):
@@ -29,6 +30,16 @@ class ExpenseTracker:
         myLabel=Label(boxaile, text="The value has been inserted")
         myLabel.grid(row=4,column=0)
         myLabel.after(1200,myLabel.destroy)
+    
+    def price_error(self, boxaile):
+        priceLabel=Label(boxaile, text="Error: The price should be a number!")
+        priceLabel.grid(row=5,column=0)
+        priceLabel.after(4000,priceLabel.destroy)
+    
+    def date_error(self, boxaile):
+        dateLabel=Label(boxaile, text="Error: The date has an incorrect format. Use this: yyyy.mm.dd")
+        dateLabel.grid(row=5,column=0)
+        dateLabel.after(5000,dateLabel.destroy)
 
     def insert(self, database, entry_name, entry_price, entry_date):
         name = entry_name.get()
@@ -37,7 +48,27 @@ class ExpenseTracker:
         insertion = database(name, price, date)
         return insertion
     
+    def price_constraint(self, price):
+        try:
+            int(price.get())
+            return True
+        except ValueError:
+            self.price_error(self.frame)
+            return False
 
+    def date_constraint(self, date):
+        date_pattern = re.compile("^\d{4}\.\d{2}\.\d{2}$")
+        if date_pattern.match(date.get()):
+            return True
+        self.date_error(self.frame)
+        return False
+    
+    def check_both_constraint(self, price, date):
+        if(not self.price_constraint(price)):
+            return False
+        if(not self.date_constraint(date)):
+            return False
+        return True
 
     def show_expenses_g(self,database):   
         expenses = database()
@@ -180,7 +211,7 @@ class ExpenseTracker:
         entry_date = customtkinter.CTkEntry(self.frame)
         entry_date.grid(row=3, column=1, sticky=W, pady=2)
 
-        ButtonInsert = customtkinter.CTkButton(self.frame,text="Insert values",command= lambda: (self.insert(db.insert_groceries,entry_name,entry_price,entry_date),self.inserted(self.frame)))
+        ButtonInsert = customtkinter.CTkButton(self.frame,text="Insert values",command= lambda: ((self.insert(db.insert_groceries,entry_name,entry_price,entry_date),self.inserted(self.frame)) if self.check_both_constraint(entry_price, entry_date) else 1))
         ButtonInsert.grid(row=1,column=2)
 
         ButtonDelete = customtkinter.CTkButton(self.frame, text="Delete Groceries", command=lambda: (self.show_expenses_g(db.select_all_gro)))
@@ -207,7 +238,7 @@ class ExpenseTracker:
         entry_date = customtkinter.CTkEntry(self.frame)
         entry_date.grid(row=3, column=1, sticky=W, pady=2)
 
-        ButtonInsert = customtkinter.CTkButton(self.frame,text="Insert values",command= lambda: (self.insert(db.insert_transportation,entry_name,entry_price,entry_date),self.inserted(self.frame)))
+        ButtonInsert = customtkinter.CTkButton(self.frame,text="Insert values",command= lambda: ((self.insert(db.insert_transportation,entry_name,entry_price,entry_date),self.inserted(self.frame)) if self.check_both_constraint(entry_price, entry_date) else 1))
         ButtonInsert.grid(row=1,column=2)
 
         ButtonDelete = customtkinter.CTkButton(self.frame, text="Delete Transportation", command=lambda: (self.show_expenses_t(db.select_all_transp)))
@@ -234,7 +265,7 @@ class ExpenseTracker:
         entry_date = customtkinter.CTkEntry(self.frame)
         entry_date.grid(row=3, column=1, sticky=W, pady=2)
 
-        ButtonInsert = customtkinter.CTkButton(self.frame,text="Insert values",command= lambda: (self.insert(db.insert_entertainment,entry_name,entry_price,entry_date),self.inserted(self.frame)))
+        ButtonInsert = customtkinter.CTkButton(self.frame,text="Insert values",command= lambda: ((self.insert(db.insert_entertainment,entry_name,entry_price,entry_date),self.inserted(self.frame)) if self.check_both_constraint(entry_price, entry_date) else 1))
         ButtonInsert.grid(row=1,column=2)
 
         ButtonDelete = customtkinter.CTkButton(self.frame, text="Delete Entertainment", command=lambda: (self.show_expenses_e(db.select_all_ent)))
@@ -261,7 +292,7 @@ class ExpenseTracker:
         entry_date = customtkinter.CTkEntry(self.frame)
         entry_date.grid(row=3, column=1, sticky=W, pady=2)
 
-        ButtonInsert = customtkinter.CTkButton(self.frame,text="Insert values",command= lambda: (self.insert(db.insert_utilities,entry_name,entry_price,entry_date),self.inserted(self.frame)))
+        ButtonInsert = customtkinter.CTkButton(self.frame,text="Insert values",command= lambda: ((self.insert(db.insert_utilities,entry_name,entry_price,entry_date),self.inserted(self.frame)) if self.check_both_constraint(entry_price, entry_date) else 1))
         ButtonInsert.grid(row=1,column=2)
 
         ButtonDelete = customtkinter.CTkButton(self.frame, text="Delete Utilities", command=lambda: (self.show_expenses_u(db.select_all_uti)))
@@ -289,7 +320,7 @@ class ExpenseTracker:
         entry_date = customtkinter.CTkEntry(self.frame)
         entry_date.grid(row=3, column=1, sticky=W, pady=2)
 
-        ButtonInsert = customtkinter.CTkButton(self.frame,text="Insert values",command= lambda: (self.insert(db.insert_other,entry_name,entry_price,entry_date),self.inserted(self.frame)))
+        ButtonInsert = customtkinter.CTkButton(self.frame,text="Insert values",command= lambda: ((self.insert(db.insert_other,entry_name,entry_price,entry_date),self.inserted(self.frame)) if self.check_both_constraint(entry_price, entry_date) else 1))
         ButtonInsert.grid(row=1,column=2)
 
         ButtonDelete = customtkinter.CTkButton(self.frame, text="Delete Other", command=lambda: (self.show_expenses_o(db.select_all_oth)))
