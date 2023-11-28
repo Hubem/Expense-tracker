@@ -229,7 +229,7 @@ def select_all_uti():
         return rows
 
 
-def select_all_other():
+def select_all_oth():
     conn = sqlite3.connect('Adatbazis/expenses.db')
     with conn:
         c = conn.cursor()

@@ -177,6 +177,11 @@ class ExpenseTracker:
         entry_date = Entry(self.frame)
         entry_date.grid(row=3, column=1, sticky=W, pady=2)
 
+        ButtonInsert = Button(self.frame,text="Insert values",command= lambda: (self.insert(db.insert_other,entry_name,entry_price,entry_date),self.inserted(self.frame)))
+        ButtonInsert.grid(row=1,column=2)
+
+        ButtonDelete = Button(self.frame, text="Delete Other", command=lambda: (self.show_expenses(db.select_all_oth)))
+        ButtonDelete.grid(row=2, column=2)
         
 
 def main():
