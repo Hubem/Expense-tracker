@@ -90,6 +90,28 @@ class ExpenseTracker:
                 db.delete_transp_by_id(id_to_delete)
             self.show_expenses_t(database)
         
+    def show_expenses_e(self,database):   
+            expenses = database()
+            self.expense_list = Listbox(self.frame,selectmode=SINGLE)
+            scroll_bar = Scrollbar(self.frame,orient='vertical',command=self.expense_list.yview)
+            self.expense_list.config(yscrollcommand=scroll_bar.set)
+
+            for expense in expenses:
+                self.expense_list.insert(END,f"{expense[0]} - {expense[1]} - {expense[2]}")
+
+            self.expense_list.grid(row=4,column=0,columnspan=2)
+            scroll_bar.grid(row=4,column=2)
+
+            delete_button = Button(self.frame,text='Delete the Selected',command= lambda: self.delete_selected_e(database,self.expense_list))
+            delete_button.grid(row=5,column=0,columnspan=2)
+
+    def delete_selected_e(self,database,expense_list):
+            selected = expense_list.curselection()
+
+            if selected:
+                id_to_delete = int(expense_list.get(selected[0]).split()[0])
+                db.delete_ent_by_id(id_to_delete)
+            self.show_expenses_e(database)    
 
 
     def show_expenses_o(self,database):   
@@ -190,7 +212,29 @@ class ExpenseTracker:
         ButtonDelete = customtkinter.CTkButton(self.frame, text="Delete Transportation", command=lambda: (self.show_expenses_t(db.select_all_transp)))
         ButtonDelete.grid(row=2, column=2)
 
+    def entertainment(self):
+        for widget in self.frame.winfo_children():
+            widget.destroy()
 
+        label_title = Label(self.frame, text='Entertainment expenses', font=('Arial', 14, 'bold'))
+        label_title.grid(row=0, column=0, columnspan=2, pady=10)
+
+        label_name = Label(self.frame, text="Name of good").grid(row=1, column=0, sticky=W, pady=2)
+        label_price = Label(self.frame, text="Price").grid(row=2, column=0, sticky=W, pady=2)
+        label_date = Label(self.frame, text="Date of pruchase").grid(row=3, column=0, sticky=W, pady=2)
+
+        entry_name = Entry(self.frame)
+        entry_name.grid(row=1, column=1, sticky=W, pady=2)
+        entry_price = Entry(self.frame)
+        entry_price.grid(row=2, column=1, sticky=W, pady=2)
+        entry_date = Entry(self.frame)
+        entry_date.grid(row=3, column=1, sticky=W, pady=2)
+
+        ButtonInsert = Button(self.frame,text="Insert values",command= lambda: (self.insert(db.insert_entertainment,entry_name,entry_price,entry_date),self.inserted(self.frame)))
+        ButtonInsert.grid(row=1,column=2)
+
+        ButtonDelete = Button(self.frame, text="Delete Entertainment", command=lambda: (self.show_expenses_e(db.select_all_ent)))
+        ButtonDelete.grid(row=2, column=2)
 
     def utilities(self):
         for widget in self.frame.winfo_children():
@@ -264,14 +308,12 @@ def main():
     resizedMine = minecart.subsample(int(minecart.width()/width),int(minecart.height()/height))
     resizedFire = firewok.subsample(int(firewok.width()/width),int(firewok.height()/height))
 
-    #type_menu = Menu(menubar, tearoff=False)
-    
-    tracker.center_button("Groceries",tracker.groceries)
-    tracker.center_button('Transportation',tracker.transportation)
-    #type_menu.add_command(label='Transportation expenses', command=tracker.transportation,image=resizedMine,compound="left")
-    #type_menu.add_command(label="Entertainment expenses",image=resizedFire,compound="left")
-    #type_menu.add_command(label="Utilities expenses", command=tracker.utilities)
-    #type_menu.add_command(label="Other expenses", command=tracker.other)
+    type_menu = Menu(menubar, tearoff=False)
+    type_menu.add_command(label='Groceries expenses', command=tracker.groceries)
+    type_menu.add_command(label='Transportation expenses', command=tracker.transportation,image=resizedMine,compound="left")
+    type_menu.add_command(label="Entertainment expenses",command=tracker.entertainment, image=resizedFire,compound="left")
+    type_menu.add_command(label="Utilities expenses", command=tracker.utilities)
+    type_menu.add_command(label="Other expenses", command=tracker.other)
 
     #exit_menu = Menu(menubar, tearoff=0)
     #exit_menu.add_command(label='Exit', command=root.destroy)
