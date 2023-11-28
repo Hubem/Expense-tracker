@@ -20,10 +20,6 @@ class ExpenseTracker:
         select_all = database
         return select_all
 
-    def delete(self, boxaile):
-        myLabel=Label(boxaile, text="The chosen value was successfully deleted")
-        myLabel.grid(row=4,column=0)
-
     def delete_expense(self, database,name, price):
         delete = database(name, price)
         return delete
@@ -32,6 +28,7 @@ class ExpenseTracker:
     def inserted(self, boxaile):
         myLabel=Label(boxaile, text="The value has been inserted")
         myLabel.grid(row=4,column=0)
+        myLabel.after(1200,myLabel.destroy)
 
     def insert(self, database, entry_name, entry_price, entry_date):
         name = entry_name.get()
