@@ -10,8 +10,9 @@ class ExpenseTracker:
         self.tracker = self
 
     def center_button(self, text, command,image,compound):
-        button = customtkinter.CTkButton(self.frame, text=text, command=command,border_width=2,bg_color='transparent',image=image,compound=compound)
-        button.pack(side='left', padx=10)
+        button = customtkinter.CTkButton(self.frame, text=text, command=command,border_width=2,image=image,compound=compound,bg_color='transparent')
+        button.configure(FLAT)
+        button.pack(side='left', padx=0,pady=0,)
         
 
 
@@ -223,17 +224,17 @@ class ExpenseTracker:
         label_price = Label(self.frame, text="Price").grid(row=2, column=0, sticky=W, pady=2)
         label_date = Label(self.frame, text="Date of pruchase").grid(row=3, column=0, sticky=W, pady=2)
 
-        entry_name = Entry(self.frame)
+        entry_name = customtkinter.CTkEntry(self.frame)
         entry_name.grid(row=1, column=1, sticky=W, pady=2)
-        entry_price = Entry(self.frame)
+        entry_price = customtkinter.CTkEntry(self.frame)
         entry_price.grid(row=2, column=1, sticky=W, pady=2)
-        entry_date = Entry(self.frame)
+        entry_date = customtkinter.CTkEntry(self.frame)
         entry_date.grid(row=3, column=1, sticky=W, pady=2)
 
-        ButtonInsert = Button(self.frame,text="Insert values",command= lambda: (self.insert(db.insert_entertainment,entry_name,entry_price,entry_date),self.inserted(self.frame)))
+        ButtonInsert = customtkinter.CTkButton(self.frame,text="Insert values",command= lambda: (self.insert(db.insert_entertainment,entry_name,entry_price,entry_date),self.inserted(self.frame)))
         ButtonInsert.grid(row=1,column=2)
 
-        ButtonDelete = Button(self.frame, text="Delete Entertainment", command=lambda: (self.show_expenses_e(db.select_all_ent)))
+        ButtonDelete = customtkinter.CTkButton(self.frame, text="Delete Entertainment", command=lambda: (self.show_expenses_e(db.select_all_ent)))
         ButtonDelete.grid(row=2, column=2)
 
     def utilities(self):
@@ -284,10 +285,7 @@ class ExpenseTracker:
 
         ButtonDelete = customtkinter.CTkButton(self.frame, text="Delete Other", command=lambda: (self.show_expenses_o(db.select_all_oth)))
         ButtonDelete.grid(row=2, column=2)
-
-  
-        
-
+    
 def main():
     root = customtkinter.CTk()
     root.geometry('1000x800')
