@@ -89,12 +89,8 @@ class ExpenseTracker:
         ButtonInsert = Button(self.frame,text="Insert values",command= lambda: (self.insert(db.insert_groceries,entry_name,entry_price,entry_date),self.inserted(self.frame)))
         ButtonInsert.grid(row=1,column=2)
 
-        ButtonDelete = Button(self.frame, text="Delete Groceries", command=lambda: self.show_expenses(db.select_all_gro))
+        ButtonDelete = Button(self.frame, text="Delete Groceries", command=lambda: (self.show_expenses(db.select_all_gro)))
         ButtonDelete.grid(row=2, column=2)
-
-    
-
-
 
     def transportation(self):
         for widget in self.frame.winfo_children():
@@ -135,17 +131,13 @@ class ExpenseTracker:
         entry_date = Entry(self.frame)
         entry_date.grid(row=3, column=1, sticky=W, pady=2)
 
-        text_box = Text(self.frame, width=40, height=10)
-        text_box.grid(row=5, column=1, columnspan=2)
-
         ButtonInsert = Button(self.frame,text="Insert values",command= lambda: (self.insert(db.insert_utilities,entry_name,entry_price,entry_date),self.inserted(self.frame)))
         ButtonInsert.grid(row=1,column=2)
 
-        ButtonDelete = Button(self.frame, text="Delete Utilities", command=lambda: (self.delete_expense(db.delete_utilities,entry_name,entry_price),self.delete(self.frame)))
+        ButtonDelete = Button(self.frame, text="Delete Utilities", command=lambda: (self.show_expenses(db.select_all_uti)))
         ButtonDelete.grid(row=2, column=2)
 
-        ButtonSelectAll = Button(self.frame, text="Select All", command=lambda: (text_box.delete(1.0, END), text_box.insert(END, self.display_all(db.select_all_utilities()))))
-        ButtonSelectAll.grid(row=3, column=2)
+        
 
         
 

@@ -208,6 +208,15 @@ def select_all_utilities():
             output = output + str(x[1]) + ' ' + str(x[2]) + ' ' + str(x[3]) + '\n'
         return output
     
+def select_all_uti():
+    conn = sqlite3.connect('Adatbazis/expenses.db')
+    with conn:
+        c = conn.cursor()
+        c.execute(SELECT_ALL1)
+        rows = c.fetchall()
+        c.close()
+        return rows
+    
 
 def select_all_other():
     conn = sqlite3.connect('Adatbazis/expenses.db')
