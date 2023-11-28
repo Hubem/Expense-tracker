@@ -159,6 +159,23 @@ class ExpenseTracker:
         ButtonDelete.grid(row=2, column=2)
 
         
+    def other(self):
+        for widget in self.frame.winfo_children():
+            widget.destroy()
+
+        label_title = Label(self.frame, text='Other expenses', font=('Arial', 14, 'bold'))
+        label_title.grid(row=0, column=0, columnspan=2, pady=10)
+
+        label_name = Label(self.frame, text="Name of good").grid(row=1, column=0, sticky=W, pady=2)
+        label_price = Label(self.frame, text="Price").grid(row=2, column=0, sticky=W, pady=2)
+        label_date = Label(self.frame, text="Date of pruchase").grid(row=3, column=0, sticky=W, pady=2)
+
+        entry_name = Entry(self.frame)
+        entry_name.grid(row=1, column=1, sticky=W, pady=2)
+        entry_price = Entry(self.frame)
+        entry_price.grid(row=2, column=1, sticky=W, pady=2)
+        entry_date = Entry(self.frame)
+        entry_date.grid(row=3, column=1, sticky=W, pady=2)
 
         
 
@@ -185,7 +202,7 @@ def main():
     type_menu.add_command(label='Transportation expenses', command=tracker.transportation,image=resizedMine,compound="left")
     type_menu.add_command(label="Entertainment expenses",image=resizedFire,compound="left")
     type_menu.add_command(label="Utilities expenses", command=tracker.utilities)
-    type_menu.add_command(label="Other expenses")
+    type_menu.add_command(label="Other expenses", command=tracker.other)
 
     exit_menu = Menu(menubar, tearoff=0)
     exit_menu.add_command(label='Exit', command=root.destroy)
