@@ -27,11 +27,11 @@ class ExpenseTracker:
         myLabel.grid(row=4,column=0)
 
     def insert(self, database, entry_name, entry_price, entry_date):
-     name = entry_name.get()
-     price = entry_price.get()
-     date = entry_date.get()
-     insertion = database(name, price, date)
-     return insertion
+        name = entry_name.get()
+        price = entry_price.get()
+        date = entry_date.get()
+        insertion = database(name, price, date)
+        return insertion
     
     def show_expenses(self,database):   
         expenses = database()
@@ -116,6 +116,26 @@ class ExpenseTracker:
 
         ButtonInsert = Button(self.frame,text="Insert values",command= lambda: (self.insert(db.insert_transportation,entry_name,entry_price,entry_date),self.inserted(self.frame)))
         ButtonInsert.grid(row=1,column=2)
+
+    def utilities(slef):
+        for widget in self.frame.winfo_children():
+            widget.destroy()
+
+        label_title = Label(self.frame, text="Utilities", font=('Arial', 14, 'bold'))
+        label_title.grid(row=0, column=0, columnspan=2, pady=10)
+
+        label_name = Label(self.frame, text="Name of good").grid(row=1, column=0, sticky=W, pady=2)
+        label_price = Label(self.frame, text="Price").grid(row=2, column=0, sticky=W, pady=2)
+        label_date = Label(self.frame, text="Date of pruchase").grid(row=3, column=0, sticky=W, pady=2)
+
+        entry_name = Entry(self.frame)
+        entry_name.grid(row=1, column=1, sticky=W, pady=2)
+        entry_price = Entry(self.frame)
+        entry_price.grid(row=2, column=1, sticky=W, pady=2)
+        entry_date = Entry(self.frame)
+        entry_date.grid(row=3, column=1, sticky=W, pady=2)
+
+
         
 
 def main():
@@ -133,7 +153,7 @@ def main():
     type_menu.add_command(label='Groceries expenses', command=tracker.groceries)
     type_menu.add_command(label='Transportation expenses', command=tracker.transportation)
     type_menu.add_command(label="Entertainment expenses")
-    type_menu.add_command(label="Utilities expenses")
+    type_menu.add_command(label="Utilities expenses", command=tracker.utilities)
     type_menu.add_command(label="Other expenses")
 
     exit_menu = Menu(menubar, tearoff=0)
