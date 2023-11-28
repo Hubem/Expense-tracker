@@ -164,7 +164,7 @@ class ExpenseTracker:
 
 def main():
     root = Tk()
-    root.geometry('800x500')
+    root.geometry('1000x800')
     root.title("Expense Tracker")
     tracker = ExpenseTracker(root)
     db.create_tables()
@@ -173,10 +173,17 @@ def main():
     menubar = Menu(root)
     root.config(menu=menubar)
 
+    minecart = PhotoImage(file="images/pngegg.png")
+    firewok = PhotoImage(file="images/firework.png")
+    width = 12
+    height = 12
+    resizedMine = minecart.subsample(int(minecart.width()/width),int(minecart.height()/height))
+    resizedFire = minecart.subsample(int(firewok.width()/width),int(firewok.height()/height))
+
     type_menu = Menu(menubar, tearoff=False)
     type_menu.add_command(label='Groceries expenses', command=tracker.groceries)
-    type_menu.add_command(label='Transportation expenses', command=tracker.transportation)
-    type_menu.add_command(label="Entertainment expenses")
+    type_menu.add_command(label='Transportation expenses', command=tracker.transportation,image=resizedMine,compound="left")
+    type_menu.add_command(label="Entertainment expenses",image=resizedFire,compound="left")
     type_menu.add_command(label="Utilities expenses", command=tracker.utilities)
     type_menu.add_command(label="Other expenses")
 
