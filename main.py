@@ -9,6 +9,11 @@ class ExpenseTracker:
         self.frame.pack()
         self.tracker = self
 
+    def center_button(self, text, command):
+        button = customtkinter.CTkButton(self.frame, text=text, command=command,border_width=2,bg_color='transparent')
+        button.pack(side='left', padx=10)
+        
+
 
     def display_all(self,database):
         select_all = database
@@ -48,7 +53,7 @@ class ExpenseTracker:
         self.expense_list.grid(row=4,column=0,columnspan=2)
         scroll_bar.grid(row=4,column=2)
 
-        delete_button = Button(self.frame,text='Delete the Selected',command= lambda: self.delete_selected_g(database,self.expense_list))
+        delete_button = customtkinter.CTkButton(self.frame,text='Delete the Selected',command= lambda: self.delete_selected_g(database,self.expense_list))
         delete_button.grid(row=5,column=0,columnspan=2)
     
     
@@ -74,7 +79,7 @@ class ExpenseTracker:
         self.expense_list.grid(row=4,column=0,columnspan=2)
         scroll_bar.grid(row=4,column=2)
 
-        delete_button = Button(self.frame,text='Delete the Selected',command= lambda: self.delete_selected_t(database,self.expense_list))
+        delete_button = customtkinter.CTkButton(self.frame,text='Delete the Selected',command= lambda: self.delete_selected_t(database,self.expense_list))
         delete_button.grid(row=5,column=0,columnspan=2)
 
     def delete_selected_t(self,database,expense_list):
@@ -99,7 +104,7 @@ class ExpenseTracker:
         self.expense_list.grid(row=4,column=0,columnspan=2)
         scroll_bar.grid(row=4,column=2)
 
-        delete_button = Button(self.frame,text='Delete the Selected',command= lambda: self.delete_selected_o(database,self.expense_list))
+        delete_button = customtkinter.CTkButton(self.frame,text='Delete the Selected',command= lambda: self.delete_selected_o(database,self.expense_list))
         delete_button.grid(row=5,column=0,columnspan=2)
 
     def delete_selected_o(self,database,expense_list):
@@ -124,7 +129,7 @@ class ExpenseTracker:
         self.expense_list.grid(row=4,column=0,columnspan=2)
         scroll_bar.grid(row=4,column=2)
 
-        delete_button = Button(self.frame,text='Delete the Selected',command= lambda: self.delete_selected_u(database,self.expense_list))
+        delete_button = customtkinter.CTkButton(self.frame,text='Delete the Selected',command= lambda: self.delete_selected_u(database,self.expense_list))
         delete_button.grid(row=5,column=0,columnspan=2)
 
     def delete_selected_u(self,database,expense_list):
@@ -155,10 +160,10 @@ class ExpenseTracker:
         entry_date = customtkinter.CTkEntry(self.frame)
         entry_date.grid(row=3, column=1, sticky=W, pady=2)
 
-        ButtonInsert = Button(self.frame,text="Insert values",command= lambda: (self.insert(db.insert_groceries,entry_name,entry_price,entry_date),self.inserted(self.frame)))
+        ButtonInsert = customtkinter.CTkButton(self.frame,text="Insert values",command= lambda: (self.insert(db.insert_groceries,entry_name,entry_price,entry_date),self.inserted(self.frame)))
         ButtonInsert.grid(row=1,column=2)
 
-        ButtonDelete = Button(self.frame, text="Delete Groceries", command=lambda: (self.show_expenses_g(db.select_all_gro)))
+        ButtonDelete = customtkinter.CTkButton(self.frame, text="Delete Groceries", command=lambda: (self.show_expenses_g(db.select_all_gro)))
         ButtonDelete.grid(row=2, column=2)
 
     def transportation(self):
@@ -179,10 +184,10 @@ class ExpenseTracker:
         entry_date = customtkinter.CTkEntry(self.frame)
         entry_date.grid(row=3, column=1, sticky=W, pady=2)
 
-        ButtonInsert = Button(self.frame,text="Insert values",command= lambda: (self.insert(db.insert_transportation,entry_name,entry_price,entry_date),self.inserted(self.frame)))
+        ButtonInsert = customtkinter.CTkButton(self.frame,text="Insert values",command= lambda: (self.insert(db.insert_transportation,entry_name,entry_price,entry_date),self.inserted(self.frame)))
         ButtonInsert.grid(row=1,column=2)
 
-        ButtonDelete = Button(self.frame, text="Delete Transportation", command=lambda: (self.show_expenses_t(db.select_all_transp)))
+        ButtonDelete = customtkinter.CTkButton(self.frame, text="Delete Transportation", command=lambda: (self.show_expenses_t(db.select_all_transp)))
         ButtonDelete.grid(row=2, column=2)
 
 
@@ -205,10 +210,10 @@ class ExpenseTracker:
         entry_date = customtkinter.CTkEntry(self.frame)
         entry_date.grid(row=3, column=1, sticky=W, pady=2)
 
-        ButtonInsert = Button(self.frame,text="Insert values",command= lambda: (self.insert(db.insert_utilities,entry_name,entry_price,entry_date),self.inserted(self.frame)))
+        ButtonInsert = customtkinter.CTkButton(self.frame,text="Insert values",command= lambda: (self.insert(db.insert_utilities,entry_name,entry_price,entry_date),self.inserted(self.frame)))
         ButtonInsert.grid(row=1,column=2)
 
-        ButtonDelete = Button(self.frame, text="Delete Utilities", command=lambda: (self.show_expenses_u(db.select_all_uti)))
+        ButtonDelete = customtkinter.CTkButton(self.frame, text="Delete Utilities", command=lambda: (self.show_expenses_u(db.select_all_uti)))
         ButtonDelete.grid(row=2, column=2)
 
         
@@ -235,6 +240,8 @@ class ExpenseTracker:
 
         ButtonDelete = customtkinter.CTkButton(self.frame, text="Delete Other", command=lambda: (self.show_expenses_o(db.select_all_oth)))
         ButtonDelete.grid(row=2, column=2)
+
+  
         
 
 def main():
@@ -257,18 +264,20 @@ def main():
     resizedMine = minecart.subsample(int(minecart.width()/width),int(minecart.height()/height))
     resizedFire = firewok.subsample(int(firewok.width()/width),int(firewok.height()/height))
 
-    type_menu = Menu(menubar, tearoff=False)
-    type_menu.add_command(label='Groceries expenses', command=tracker.groceries)
-    type_menu.add_command(label='Transportation expenses', command=tracker.transportation,image=resizedMine,compound="left")
-    type_menu.add_command(label="Entertainment expenses",image=resizedFire,compound="left")
-    type_menu.add_command(label="Utilities expenses", command=tracker.utilities)
-    type_menu.add_command(label="Other expenses", command=tracker.other)
+    #type_menu = Menu(menubar, tearoff=False)
+    
+    tracker.center_button("Groceries",tracker.groceries)
+    tracker.center_button('Transportation',tracker.transportation)
+    #type_menu.add_command(label='Transportation expenses', command=tracker.transportation,image=resizedMine,compound="left")
+    #type_menu.add_command(label="Entertainment expenses",image=resizedFire,compound="left")
+    #type_menu.add_command(label="Utilities expenses", command=tracker.utilities)
+    #type_menu.add_command(label="Other expenses", command=tracker.other)
 
-    exit_menu = Menu(menubar, tearoff=0)
-    exit_menu.add_command(label='Exit', command=root.destroy)
+    #exit_menu = Menu(menubar, tearoff=0)
+    #exit_menu.add_command(label='Exit', command=root.destroy)
 
-    menubar.add_cascade(label="Types", menu=type_menu)
-    menubar.add_cascade(label="Other", menu=exit_menu)
+    #menubar.add_cascade(label="Types", menu=type_menu)
+    #menubar.add_cascade(label="Other", menu=exit_menu)
     
 
     root.mainloop()
