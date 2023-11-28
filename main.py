@@ -33,7 +33,7 @@ class ExpenseTracker:
         insertion = database(name, price, date)
         return insertion
     
-    
+
 
     def show_expenses_g(self,database):   
         expenses = database()
@@ -111,6 +111,31 @@ class ExpenseTracker:
 
 
 
+    def show_expenses_u(self,database):   
+        expenses = database()
+        self.expense_list = Listbox(self.frame,selectmode=SINGLE)
+        scroll_bar = Scrollbar(self.frame,orient='vertical',command=self.expense_list.yview)
+        self.expense_list.config(yscrollcommand=scroll_bar.set)
+
+        for expense in expenses:
+            self.expense_list.insert(END,f"{expense[0]} - {expense[1]} - {expense[2]}")
+
+        self.expense_list.grid(row=4,column=0,columnspan=2)
+        scroll_bar.grid(row=4,column=2)
+
+        delete_button = Button(self.frame,text='Delete the Selected',command= lambda: self.delete_selected_u(database,self.expense_list))
+        delete_button.grid(row=5,column=0,columnspan=2)
+
+    def delete_selected_u(self,database,expense_list):
+            selected = expense_list.curselection()
+
+            if selected:
+                id_to_delete = int(expense_list.get(selected[0]).split()[0])
+                db.delete_uti_by_id(id_to_delete)
+            self.show_expenses_u(database)
+
+
+
     def groceries(self):
         for widget in self.frame.winfo_children():
             widget.destroy()
@@ -182,7 +207,7 @@ class ExpenseTracker:
         ButtonInsert = Button(self.frame,text="Insert values",command= lambda: (self.insert(db.insert_utilities,entry_name,entry_price,entry_date),self.inserted(self.frame)))
         ButtonInsert.grid(row=1,column=2)
 
-        ButtonDelete = Button(self.frame, text="Delete Utilities", command=lambda: (self.show_expenses(db.select_all_uti)))
+        ButtonDelete = Button(self.frame, text="Delete Utilities", command=lambda: (self.show_expenses_u(db.select_all_uti)))
         ButtonDelete.grid(row=2, column=2)
 
         
