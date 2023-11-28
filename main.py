@@ -186,6 +186,9 @@ class ExpenseTracker:
         ButtonDelete = customtkinter.CTkButton(self.frame, text="Delete Groceries", command=lambda: (self.show_expenses_g(db.select_all_gro)))
         ButtonDelete.grid(row=2, column=2)
 
+        ButtonBack = customtkinter.CTkButton(self.frame,text='Back',command=lambda: self.show_main())
+        ButtonBack.grid(row=3,column=2)
+
     def transportation(self):
         for widget in self.frame.winfo_children():
             widget.destroy()
@@ -209,6 +212,9 @@ class ExpenseTracker:
 
         ButtonDelete = customtkinter.CTkButton(self.frame, text="Delete Transportation", command=lambda: (self.show_expenses_t(db.select_all_transp)))
         ButtonDelete.grid(row=2, column=2)
+
+        ButtonBack = customtkinter.CTkButton(self.frame,text='Back',command=lambda: self.show_main())
+        ButtonBack.grid(row=3,column=2)
 
     def entertainment(self):
         for widget in self.frame.winfo_children():
@@ -234,6 +240,9 @@ class ExpenseTracker:
         ButtonDelete = customtkinter.CTkButton(self.frame, text="Delete Entertainment", command=lambda: (self.show_expenses_e(db.select_all_ent)))
         ButtonDelete.grid(row=2, column=2)
 
+
+        ButtonBack = customtkinter.CTkButton(self.frame,text='Back',command=lambda: self.show_main())
+        ButtonBack.grid(row=3,column=2)
     def utilities(self):
         for widget in self.frame.winfo_children():
             widget.destroy()
@@ -257,6 +266,9 @@ class ExpenseTracker:
 
         ButtonDelete = customtkinter.CTkButton(self.frame, text="Delete Utilities", command=lambda: (self.show_expenses_u(db.select_all_uti)))
         ButtonDelete.grid(row=2, column=2)
+
+        ButtonBack = customtkinter.CTkButton(self.frame,text='Back',command=lambda: self.show_main())
+        ButtonBack.grid(row=3,column=2)
 
         
     def other(self):
@@ -282,6 +294,29 @@ class ExpenseTracker:
 
         ButtonDelete = customtkinter.CTkButton(self.frame, text="Delete Other", command=lambda: (self.show_expenses_o(db.select_all_oth)))
         ButtonDelete.grid(row=2, column=2)
+
+        ButtonBack = customtkinter.CTkButton(self.frame,text='Back',command=lambda: self.show_main())
+        ButtonBack.grid(row=3,column=2)
+
+
+    def show_main(self):
+        for widget in self.frame.winfo_children():
+            widget.destroy()
+
+        self.display_main()
+
+    def display_main(self):
+        minecart = PhotoImage(file="images/pngegg.png")
+        firewok = PhotoImage(file="images/firework.png")
+        width = 12
+        height = 12
+        resizedMine = minecart.subsample(int(minecart.width()/width),int(minecart.height()/height))
+        resizedFire = firewok.subsample(int(firewok.width()/width),int(firewok.height()/height))
+        self.center_button('Groceries expenses',self.groceries,image=resizedMine,compound="left")
+        self.center_button('Transportation expenses',self.transportation,image=resizedMine,compound="left")
+        self.center_button("Entertainment expenses",self.entertainment, image=resizedFire,compound="left")
+        self.center_button("Utilities expenses",self.utilities,image=resizedMine,compound="left")
+        self.center_button("Other expenses",self.other,image=resizedMine,compound="left")
     
 def main():
     root = customtkinter.CTk()
