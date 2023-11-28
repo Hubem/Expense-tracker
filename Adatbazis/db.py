@@ -35,6 +35,10 @@ DELETE_UTILITIES = "DELETE FROM utilities WHERE name = ? AND price = ?;"
 DELETE_OTHER = "DELETE FROM other WHERE name = ? AND price = ?;"
 
 DELETE_GROCERIES_BY_ID = "DELETE FROM groceries WHERE id = ?;"
+DELETE_TRANSPORTATION_BY_ID = "DELETE FROM transportation WHERE id = ?;"
+DELETE_ENTERTAINMENT_BY_ID = "DELETE FROM groceries WHERE id = ?;"
+DELETE_UTILITIES_ID = "DELETE FROM utilities WHERE id = ?;"
+DELETE_OTHER_ID = "DELETE FROM other WHERE id = ?;"
 
 tables_list = [CREATE_GROCERIES,CREATE_TRANSPORTATION,CREATE_ENTERTAINMENT,CREATE_UTILITIES,CREATE_OTHER]
 
@@ -104,6 +108,38 @@ def delete_gro_by_id(id):
     with conn:
         c = conn.cursor()
         c.execute(DELETE_GROCERIES_BY_ID,(id,))
+        conn.commit()
+        c.close()
+
+def delete_transp_by_id(id):
+    conn = sqlite3.connect('Adatbazis/expenses.db')
+    with conn:
+        c = conn.cursor()
+        c.execute(DELETE_TRANSPORTATION_BY_ID,(id,))
+        conn.commit()
+        c.close()
+
+def delete_ent_by_id(id):
+    conn = sqlite3.connect('Adatbazis/expenses.db')
+    with conn:
+        c = conn.cursor()
+        c.execute(DELETE_ENTERTAINMENT_BY_ID,(id,))
+        conn.commit()
+        c.close()
+
+def delete_uti_by_id(id):
+    conn = sqlite3.connect('Adatbazis/expenses.db')
+    with conn:
+        c = conn.cursor()
+        c.execute(DELETE_UTILITIES_ID,(id,))
+        conn.commit()
+        c.close()
+
+def delete_other_by_id(id):
+    conn = sqlite3.connect('Adatbazis/expenses.db')
+    with conn:
+        c = conn.cursor()
+        c.execute(DELETE_OTHER_ID,(id,))
         conn.commit()
         c.close()
 
