@@ -1,6 +1,7 @@
 from Adatbazis import db
 from tkinter import *
 from tkinter.ttk import *
+import customtkinter
 
 class ExpenseTracker:
     def __init__(self, master):
@@ -147,11 +148,11 @@ class ExpenseTracker:
         label_price = Label(self.frame, text="Price").grid(row=2, column=0, sticky=W, pady=2)
         label_date = Label(self.frame, text="Date of pruchase").grid(row=3, column=0, sticky=W, pady=2)
 
-        entry_name = Entry(self.frame)
+        entry_name = customtkinter.CTkEntry(self.frame)
         entry_name.grid(row=1, column=1, sticky=W, pady=2)
-        entry_price = Entry(self.frame)
+        entry_price = customtkinter.CTkEntry(self.frame)
         entry_price.grid(row=2, column=1, sticky=W, pady=2)
-        entry_date = Entry(self.frame)
+        entry_date = customtkinter.CTkEntry(self.frame)
         entry_date.grid(row=3, column=1, sticky=W, pady=2)
 
         ButtonInsert = Button(self.frame,text="Insert values",command= lambda: (self.insert(db.insert_groceries,entry_name,entry_price,entry_date),self.inserted(self.frame)))
@@ -171,11 +172,11 @@ class ExpenseTracker:
         label_price = Label(self.frame, text="Price").grid(row=2, column=0, sticky=W, pady=2)
         label_date = Label(self.frame, text="Date of pruchase").grid(row=3, column=0, sticky=W, pady=2)
 
-        entry_name = Entry(self.frame)
+        entry_name = customtkinter.CTkEntry(self.frame)
         entry_name.grid(row=1, column=1, sticky=W, pady=2)
-        entry_price = Entry(self.frame)
+        entry_price = customtkinter.CTkEntry(self.frame)
         entry_price.grid(row=2, column=1, sticky=W, pady=2)
-        entry_date = Entry(self.frame)
+        entry_date = customtkinter.CTkEntry(self.frame)
         entry_date.grid(row=3, column=1, sticky=W, pady=2)
 
         ButtonInsert = Button(self.frame,text="Insert values",command= lambda: (self.insert(db.insert_transportation,entry_name,entry_price,entry_date),self.inserted(self.frame)))
@@ -197,11 +198,11 @@ class ExpenseTracker:
         label_price = Label(self.frame, text="Price").grid(row=2, column=0, sticky=W, pady=2)
         label_date = Label(self.frame, text="Date of pruchase").grid(row=3, column=0, sticky=W, pady=2)
 
-        entry_name = Entry(self.frame)
+        entry_name = customtkinter.CTkEntry(self.frame)
         entry_name.grid(row=1, column=1, sticky=W, pady=2)
-        entry_price = Entry(self.frame)
+        entry_price = customtkinter.CTkEntry(self.frame)
         entry_price.grid(row=2, column=1, sticky=W, pady=2)
-        entry_date = Entry(self.frame)
+        entry_date = customtkinter.CTkEntry(self.frame)
         entry_date.grid(row=3, column=1, sticky=W, pady=2)
 
         ButtonInsert = Button(self.frame,text="Insert values",command= lambda: (self.insert(db.insert_utilities,entry_name,entry_price,entry_date),self.inserted(self.frame)))
@@ -222,26 +223,28 @@ class ExpenseTracker:
         label_price = Label(self.frame, text="Price").grid(row=2, column=0, sticky=W, pady=2)
         label_date = Label(self.frame, text="Date of pruchase").grid(row=3, column=0, sticky=W, pady=2)
 
-        entry_name = Entry(self.frame)
+        entry_name = customtkinter.CTkEntry(self.frame)
         entry_name.grid(row=1, column=1, sticky=W, pady=2)
-        entry_price = Entry(self.frame)
+        entry_price = customtkinter.CTkEntry(self.frame)
         entry_price.grid(row=2, column=1, sticky=W, pady=2)
-        entry_date = Entry(self.frame)
+        entry_date = customtkinter.CTkEntry(self.frame)
         entry_date.grid(row=3, column=1, sticky=W, pady=2)
 
-        ButtonInsert = Button(self.frame,text="Insert values",command= lambda: (self.insert(db.insert_other,entry_name,entry_price,entry_date),self.inserted(self.frame)))
+        ButtonInsert = customtkinter.CTkButton(self.frame,text="Insert values",command= lambda: (self.insert(db.insert_other,entry_name,entry_price,entry_date),self.inserted(self.frame)))
         ButtonInsert.grid(row=1,column=2)
 
-        ButtonDelete = Button(self.frame, text="Delete Other", command=lambda: (self.show_expenses_o(db.select_all_oth)))
+        ButtonDelete = customtkinter.CTkButton(self.frame, text="Delete Other", command=lambda: (self.show_expenses_o(db.select_all_oth)))
         ButtonDelete.grid(row=2, column=2)
         
 
 def main():
-    root = Tk()
+    root = customtkinter.CTk()
     root.geometry('1000x800')
     root.title("Expense Tracker")
     tracker = ExpenseTracker(root)
     db.create_tables()
+    customtkinter.set_appearance_mode('dark')
+    customtkinter.set_default_color_theme('blue')
 
     #Menubar
     menubar = Menu(root)
@@ -252,7 +255,7 @@ def main():
     width = 12
     height = 12
     resizedMine = minecart.subsample(int(minecart.width()/width),int(minecart.height()/height))
-    resizedFire = minecart.subsample(int(firewok.width()/width),int(firewok.height()/height))
+    resizedFire = firewok.subsample(int(firewok.width()/width),int(firewok.height()/height))
 
     type_menu = Menu(menubar, tearoff=False)
     type_menu.add_command(label='Groceries expenses', command=tracker.groceries)
