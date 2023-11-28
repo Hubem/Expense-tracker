@@ -202,6 +202,41 @@ def select_all_gro():
         rows = c.fetchall()
         c.close()
         return rows
+def select_all_transp():
+    conn = sqlite3.connect('Adatbazis/expenses.db')
+    with conn:
+        c = conn.cursor()
+        c.execute(SELECT_ALL2)
+        rows = c.fetchall()
+        c.close()
+        return rows
+def select_all_ent():
+    conn = sqlite3.connect('Adatbazis/expenses.db')
+    with conn:
+        c = conn.cursor()
+        c.execute(SELECT_ALL3)
+        rows = c.fetchall()
+        c.close()
+        return rows
+
+def select_all_uti():
+    conn = sqlite3.connect('Adatbazis/expenses.db')
+    with conn:
+        c = conn.cursor()
+        c.execute(SELECT_ALL4)
+        rows = c.fetchall()
+        c.close()
+        return rows
+
+
+def select_all_other():
+    conn = sqlite3.connect('Adatbazis/expenses.db')
+    with conn:
+        c = conn.cursor()
+        c.execute(SELECT_ALL5)
+        rows = c.fetchall()
+        c.close()
+        return rows
 
 
         
@@ -243,15 +278,6 @@ def select_all_utilities():
         for x in list:
             output = output + str(x[1]) + ' ' + str(x[2]) + ' ' + str(x[3]) + '\n'
         return output
-    
-def select_all_uti():
-    conn = sqlite3.connect('Adatbazis/expenses.db')
-    with conn:
-        c = conn.cursor()
-        c.execute(SELECT_ALL1)
-        rows = c.fetchall()
-        c.close()
-        return rows
     
 
 def select_all_other():
