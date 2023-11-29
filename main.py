@@ -86,6 +86,21 @@ class ExpenseTracker:
 
         delete_button = customtkinter.CTkButton(self.frame,text='Delete the Selected',command= lambda: self.delete_selected_g(database,self.expense_list))
         delete_button.grid(row=5,column=0,columnspan=2)
+
+    def show_expenses_gnd(self,database):
+        expenses = database()
+        self.expense_list = Listbox(self.frame,selectmode=SINGLE)
+        scroll_bar = Scrollbar(self.frame,orient='vertical',command=self.expense_list.yview)
+        self.expense_list.config(yscrollcommand=scroll_bar.set)
+
+        for expense in expenses:
+            self.expense_list.insert(END,f"{expense[0]} - {expense[1]} - {expense[2]}")
+
+        self.expense_list.grid(row=4,column=0,columnspan=2)
+        scroll_bar.grid(row=4,column=2)
+
+        self.expense_list.after(3000,self.expense_list.destroy)
+        scroll_bar.after(3000,scroll_bar.destroy)
     
     
     def delete_selected_g(self,database,expense_list):
@@ -222,6 +237,8 @@ class ExpenseTracker:
         ButtonBack = customtkinter.CTkButton(self.frame,text='Back',command=lambda: self.show_main())
         ButtonBack.grid(row=3,column=2)
 
+        ButtonAll = customtkinter.CTkButton(self.frame,text='Show all',command=lambda:self.show_expenses_gnd(db.select_all_gro))
+        ButtonAll.grid(row=2,column=3)
 
     def transportation(self):
         for widget in self.frame.winfo_children():
