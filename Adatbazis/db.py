@@ -40,6 +40,12 @@ DELETE_ENTERTAINMENT_BY_ID = "DELETE FROM entertainment WHERE id = ?;"
 DELETE_UTILITIES_ID = "DELETE FROM utilities WHERE id = ?;"
 DELETE_OTHER_ID = "DELETE FROM other WHERE id = ?;"
 
+SELECT_GROCERIES_FROM_TO = "SELECT * FROM groceries WHERE date BETWEEN ? AND ?"
+SELECT_TRANSPORTATION_FROM_TO = "SELECT * FROM transportation WHERE date BETWEEN ? AND ?"
+SELECT_ENTERTAINMENT_FROM_TO = "SELECT * FROM entertainment WHERE date BETWEEN ? AND ?"
+SELECT_UTILITIES_FROM_TO = "SELECT * FROM utilities WHERE date BETWEEN ? AND ?"
+SELECT_OTHER_FROM_TO = "SELECT * FROM other WHERE date BETWEEN ? AND ?"
+
 tables_list = [CREATE_GROCERIES,CREATE_TRANSPORTATION,CREATE_ENTERTAINMENT,CREATE_UTILITIES,CREATE_OTHER]
 
 def create_tables():
@@ -47,6 +53,64 @@ def create_tables():
     with conn:
         for table in tables_list:
             conn.execute(table)
+
+#graph functions
+def groceries_date(start, end):
+    conn=sqlite3.connect('Adatbazis/expenses.db')
+    with conn:
+        c = conn.cursor()
+        c.execute(SELECT_GROCERIES_FROM_TO, (start, end))
+        lista = c.fetchall()
+        c.close()
+        output = ''
+        for x in lista:
+            output = output + str(x[1]) + ' ' + str(x[2]) + ' ' + str(x[3]) + '\n'
+        return output
+
+def transportation_date(start, end):
+    conn=sqlite3.connect('Adatbazis/expenses.db')
+    with conn:
+        c = conn.cursor()
+        c.execute(SELECT_TRANSPORTATION_FROM_TO, (start, end))
+        lista = c.fetchall()
+        c.close()
+        output = ''
+        for x in lista:
+            output = output + str(x[1]) + ' ' + str(x[2]) + ' ' + str(x[3]) + '\n'
+        return output
+def entertainment_date(start, end):
+    conn=sqlite3.connect('Adatbazis/expenses.db')
+    with conn:
+        c = conn.cursor()
+        c.execute(SELECT_ENTERTAINMENT_FROM_TO, (start, end))
+        lista = c.fetchall()
+        c.close()
+        output = ''
+        for x in lista:
+            output = output + str(x[1]) + ' ' + str(x[2]) + ' ' + str(x[3]) + '\n'
+        return output
+def utilities_date(start, end):
+    conn=sqlite3.connect('Adatbazis/expenses.db')
+    with conn:
+        c = conn.cursor()
+        c.execute(SELECT_UTILITIES_FROM_TO, (start, end))
+        lista = c.fetchall()
+        c.close()
+        output = ''
+        for x in lista:
+            output = output + str(x[1]) + ' ' + str(x[2]) + ' ' + str(x[3]) + '\n'
+        return output
+def other_date(start, end):
+    conn=sqlite3.connect('Adatbazis/expenses.db')
+    with conn:
+        c = conn.cursor()
+        c.execute(SELECT_OTHER_FROM_TO, (start, end))
+        lista = c.fetchall()
+        c.close()
+        output = ''
+        for x in lista:
+            output = output + str(x[1]) + ' ' + str(x[2]) + ' ' + str(x[3]) + '\n'
+        return output
 
 #insert functions
 

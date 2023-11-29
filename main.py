@@ -5,6 +5,8 @@ from tkinter import *
 from tkinter.ttk import *
 import customtkinter
 import re
+import matplotlib.pyplot as plt
+import numpy
 
 class ExpenseTracker:
     def __init__(self, master):
@@ -349,6 +351,117 @@ class ExpenseTracker:
         ButtonBack = customtkinter.CTkButton(self.frame,text='Back',command=lambda: self.show_main())
         ButtonBack.grid(row=3,column=2)
 
+    def show_graph(self, cat, start, end):
+        if not (self.date_constraint(start) or self.date_constraint(end)):
+            return
+        if cat == "Groceries":
+            dates = []
+            prices = []
+            output = db.groceries_date(start.get(), end.get())
+            lines = output.split("\n")[:-1]
+            for line in lines:
+                split_line = line.split()
+                prices.append(split_line[1])
+                dates.append(split_line[2])
+            hist = {}
+            for date, price in zip(dates, prices):
+                hist[date] = hist.get(date, 0) + int(price)
+            fig, ax = plt.subplots()
+            ax.bar(hist.keys(), hist.values())
+            ax.set_title(f"Groceries expenses from {start.get()} to {end.get()}")
+            fig.show()
+            
+        elif cat == "Transportation":
+            dates = []
+            prices = []
+            output = db.transportation_date(start.get(), end.get())
+            lines = output.split("\n")[:-1]
+            for line in lines:
+                print(line.split())
+                split_line = line.split()
+                prices.append(split_line[1])
+                dates.append(split_line[2])
+            hist = {}
+            for date, price in zip(dates, prices):
+                hist[date] = hist.get(date, 0) + int(price)
+            fig, ax = plt.subplots()
+            ax.bar(hist.keys(), hist.values())
+            ax.set_title(f"Transportation expenses from {start.get()} to {end.get()}")
+            fig.show()
+        elif cat == "Entertainment":
+            dates = []
+            prices = []
+            output = db.entertainment_date(start.get(), end.get())
+            lines = output.split("\n")[:-1]
+            for line in lines:
+                print(line.split())
+                split_line = line.split()
+                prices.append(split_line[1])
+                dates.append(split_line[2])
+            hist = {}
+            for date, price in zip(dates, prices):
+                hist[date] = hist.get(date, 0) + int(price)
+            fig, ax = plt.subplots()
+            ax.bar(hist.keys(), hist.values())
+            ax.set_title(f"Entertainment expenses from {start.get()} to {end.get()}")
+            fig.show()
+        elif cat == "Utilities":
+            dates = []
+            prices = []
+            output = db.utilities_date(start.get(), end.get())
+            lines = output.split("\n")[:-1]
+            for line in lines:
+                print(line.split())
+                split_line = line.split()
+                prices.append(split_line[1])
+                dates.append(split_line[2])
+            hist = {}
+            for date, price in zip(dates, prices):
+                hist[date] = hist.get(date, 0) + int(price)
+            fig, ax = plt.subplots()
+            ax.bar(hist.keys(), hist.values())
+            ax.set_title(f"Utilities expenses from {start.get()} to {end.get()}")
+            fig.show()
+        elif cat == "Other":
+            dates = []
+            prices = []
+            output = db.other_date(start.get(), end.get())
+            lines = output.split("\n")[:-1]
+            for line in lines:
+                print(line.split())
+                split_line = line.split()
+                prices.append(split_line[1])
+                dates.append(split_line[2])
+            hist = {}
+            for date, price in zip(dates, prices):
+                hist[date] = hist.get(date, 0) + int(price)
+            fig, ax = plt.subplots()
+            ax.set_title(f"Other expenses from {start.get()} to {end.get()}")
+            ax.bar(hist.keys(), hist.values())
+            fig.show()
+    def graph(self):
+        for widget in self.frame.winfo_children():
+            widget.destroy()
+        
+        label_title = Label(self.frame, text='Show graph', font=('Arial', 14, 'bold'))
+        label_title.grid(row=0, column=0, columnspan=2, pady=10)
+        
+        label_combobox = Label(self.frame, text="Category:").grid(row=1, column=0, sticky=W, pady=2)
+        label_startdate = Label(self.frame, text="From").grid(row=2, column=0, sticky=W, pady=2)
+        label_enddate = Label(self.frame, text="To").grid(row=3, column=0, sticky=W, pady=2)
+        
+        category_combobox = Combobox(self.frame, values=["Groceries", "Transportation", "Entertainment", "Utilities", "Other"])
+        category_combobox.grid(row=1, column=1, sticky=W, pady=2)
+        entry_start = customtkinter.CTkEntry(self.frame)
+        entry_start.grid(row=2, column=1, sticky=W, pady=2)
+        entry_end = customtkinter.CTkEntry(self.frame)
+        entry_end.grid(row=3, column=1, sticky=W, pady=2)
+        
+        ButtonShow = customtkinter.CTkButton(self.frame, text="Show", command=lambda: self.show_graph(category_combobox.get(), entry_start, entry_end))
+        ButtonShow.grid(row=2, column=2)
+
+        ButtonBack = customtkinter.CTkButton(self.frame,text='Back',command=lambda: self.show_main())
+        ButtonBack.grid(row=3,column=2)
 
     def show_main(self):
         for widget in self.frame.winfo_children():
@@ -375,13 +488,14 @@ class ExpenseTracker:
         self.center_button("Entertainment expenses",self.entertainment, image=resizedFire,compound="left")
         self.center_button("Utilities expenses",self.utilities,image=resizedArmor,compound="left")
         self.center_button("Other expenses",self.other,image=resizedMine,compound="left")
+        self.center_button("Show graph", self.graph, image=resizedBread, compound="left")
         self.center_button('Exit',root.destroy,image=resizedDoor,compound='left')
         
     
 def main():
     global root
     root = customtkinter.CTk()
-    root.geometry('1000x800')
+    root.geometry('1150x800')
     root.title("Expense Tracker")
     tracker = ExpenseTracker(root)
     db.create_tables()
@@ -410,6 +524,7 @@ def main():
     tracker.center_button("Entertainment expenses",tracker.entertainment, image=resizedFire,compound="left")
     tracker.center_button("Utilities expenses",tracker.utilities,image=resizedArmor,compound="left")
     tracker.center_button("Other expenses",tracker.other,image=resizedFire,compound="left")
+    tracker.center_button("Show graph", tracker.graph,image=resizedBread, compound="left")
     tracker.center_button('Exit',root.destroy,image=resizedDoor,compound='left')
 
     
