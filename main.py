@@ -15,7 +15,7 @@ class ExpenseTracker:
     def center_button(self, text, command,image,compound):
         button = customtkinter.CTkButton(self.frame, text=text, command=command,border_width=2,image=image,compound=compound,bg_color='transparent',corner_radius=8)
         
-        button.pack(side='left', padx=5,pady=5)
+        button.pack(side='left')
         
 
 
@@ -341,18 +341,27 @@ class ExpenseTracker:
     def display_main(self):
         minecart = PhotoImage(file="images/pngegg.png")
         firewok = PhotoImage(file="images/firework.png")
-        width = 12
-        height = 12
+        bread = PhotoImage(file="images/bread.png")
+        armor = PhotoImage(file='images/armor.png')
+        door = PhotoImage(file='images/door.png')
+        width = 22
+        height = 22
         resizedMine = minecart.subsample(int(minecart.width()/width),int(minecart.height()/height))
         resizedFire = firewok.subsample(int(firewok.width()/width),int(firewok.height()/height))
+        resizedBread = bread.subsample(int(bread.width()/width),int(bread.height()/height))
+        resizedArmor = armor.subsample(int(armor.width()/width),int(armor.height()/height))
+        resizedDoor = door.subsample(int(door.width()/width),int(door.height()/height))
+
         self.center_button('Groceries expenses',self.groceries,image=resizedMine,compound="left")
         self.center_button('Transportation expenses',self.transportation,image=resizedMine,compound="left")
         self.center_button("Entertainment expenses",self.entertainment, image=resizedFire,compound="left")
-        self.center_button("Utilities expenses",self.utilities,image=resizedMine,compound="left")
+        self.center_button("Utilities expenses",self.utilities,image=resizedArmor,compound="left")
         self.center_button("Other expenses",self.other,image=resizedMine,compound="left")
+        self.center_button('Exit',root.destroy,image=resizedDoor,compound='left')
         
     
 def main():
+    global root
     root = customtkinter.CTk()
     root.geometry('1000x800')
     root.title("Expense Tracker")
