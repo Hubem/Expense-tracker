@@ -32,7 +32,7 @@ class TestExpenseTracker(unittest.TestCase):
 
     def test_show_expenses(self):
         # Call the show_expenses method
-        self.tracker.show_expenses(self.mock_db)
+        self.tracker.show_expenses_e(self.mock_db)
 
         # Check that the Listbox was created
         self.assertIsInstance(self.tracker.expense_list, Listbox)
@@ -54,7 +54,7 @@ class TestExpenseTracker(unittest.TestCase):
         self.tracker.delete_expense(self.mock_db,entry_name.get(), entry_price.get())
 
         # Check if the value is no longer present in the database
-        expenses_after_delete = self.mock_db.show_expenses(self.mock_db)
+        expenses_after_delete = self.mock_db.show_expenses_e(self.mock_db)
         self.assertNotIn('Sample_Grocery - 10 - 2023-01-01', expenses_after_delete)
 
 
@@ -64,7 +64,7 @@ class TestExpenseTracker(unittest.TestCase):
      mock_listbox.curselection.return_value = ()
      self.tracker.expense_list = mock_listbox
     
-     self.tracker.delete_selected(self.mock_db, mock_listbox)
+     self.tracker.delete_selected_e(self.mock_db, mock_listbox)
      
      self.mock_db.delete_gro_by_id.assert_not_called()
 
