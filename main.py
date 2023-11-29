@@ -1,3 +1,4 @@
+from turtle import right
 from Adatbazis import db
 from tkinter import *
 from tkinter.ttk import *
@@ -11,9 +12,9 @@ class ExpenseTracker:
         self.tracker = self
 
     def center_button(self, text, command,image,compound):
-        button = customtkinter.CTkButton(self.frame, text=text, command=command,border_width=2,image=image,compound=compound,bg_color='transparent')
-        button.configure(FLAT)
-        button.pack(side='left', padx=0,pady=0,)
+        button = customtkinter.CTkButton(self.frame, text=text, command=command,border_width=2,image=image,compound=compound,bg_color='transparent',corner_radius=8)
+        
+        button.pack(side='left', padx=5,pady=5)
         
 
 
@@ -348,6 +349,7 @@ class ExpenseTracker:
         self.center_button("Entertainment expenses",self.entertainment, image=resizedFire,compound="left")
         self.center_button("Utilities expenses",self.utilities,image=resizedMine,compound="left")
         self.center_button("Other expenses",self.other,image=resizedMine,compound="left")
+        
     
 def main():
     root = customtkinter.CTk()
@@ -358,7 +360,6 @@ def main():
     customtkinter.set_appearance_mode('dark')
     customtkinter.set_default_color_theme('blue')
 
-  
 
     minecart = PhotoImage(file="images/pngegg.png")
     firewok = PhotoImage(file="images/firework.png")
@@ -372,6 +373,7 @@ def main():
     tracker.center_button("Entertainment expenses",tracker.entertainment, image=resizedFire,compound="left")
     tracker.center_button("Utilities expenses",tracker.utilities,image=resizedMine,compound="left")
     tracker.center_button("Other expenses",tracker.other,image=resizedMine,compound="left")
+    tracker.center_button('Exit',root.destroy,image=resizedFire,compound='left')
 
     
 
