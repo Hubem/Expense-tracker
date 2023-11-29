@@ -222,6 +222,7 @@ class ExpenseTracker:
         ButtonBack = customtkinter.CTkButton(self.frame,text='Back',command=lambda: self.show_main())
         ButtonBack.grid(row=3,column=2)
 
+
     def transportation(self):
         for widget in self.frame.winfo_children():
             widget.destroy()
@@ -352,7 +353,7 @@ class ExpenseTracker:
         resizedArmor = armor.subsample(int(armor.width()/width),int(armor.height()/height))
         resizedDoor = door.subsample(int(door.width()/width),int(door.height()/height))
 
-        self.center_button('Groceries expenses',self.groceries,image=resizedMine,compound="left")
+        self.center_button('Groceries expenses',self.groceries,image=resizedBread,compound="left")
         self.center_button('Transportation expenses',self.transportation,image=resizedMine,compound="left")
         self.center_button("Entertainment expenses",self.entertainment, image=resizedFire,compound="left")
         self.center_button("Utilities expenses",self.utilities,image=resizedArmor,compound="left")
@@ -367,7 +368,7 @@ def main():
     root.title("Expense Tracker")
     tracker = ExpenseTracker(root)
     db.create_tables()
-    customtkinter.set_appearance_mode('dark')
+    #customtkinter.set_appearance_mode('dark')
     customtkinter.set_default_color_theme('blue')
 
 
