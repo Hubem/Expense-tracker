@@ -1,3 +1,4 @@
+from textwrap import fill
 from turtle import right
 from Adatbazis import db
 from tkinter import *
@@ -363,17 +364,26 @@ def main():
 
     minecart = PhotoImage(file="images/pngegg.png")
     firewok = PhotoImage(file="images/firework.png")
-    width = 12
-    height = 12
+    bread = PhotoImage(file="images/bread.png")
+    armor = PhotoImage(file='images/armor.png')
+    door = PhotoImage(file='images/door.png')
+    width = 22
+    height = 22
     resizedMine = minecart.subsample(int(minecart.width()/width),int(minecart.height()/height))
     resizedFire = firewok.subsample(int(firewok.width()/width),int(firewok.height()/height))
+    resizedBread = bread.subsample(int(bread.width()/width),int(bread.height()/height))
+    resizedArmor = armor.subsample(int(armor.width()/width),int(armor.height()/height))
+    resizedDoor = door.subsample(int(door.width()/width),int(door.height()/height))
 
-    tracker.center_button('Groceries expenses',tracker.groceries,image=resizedMine,compound="left")
+
+
+
+    tracker.center_button('Groceries expenses',tracker.groceries,image=resizedBread,compound="left")
     tracker.center_button('Transportation expenses',tracker.transportation,image=resizedMine,compound="left")
     tracker.center_button("Entertainment expenses",tracker.entertainment, image=resizedFire,compound="left")
-    tracker.center_button("Utilities expenses",tracker.utilities,image=resizedMine,compound="left")
-    tracker.center_button("Other expenses",tracker.other,image=resizedMine,compound="left")
-    tracker.center_button('Exit',root.destroy,image=resizedFire,compound='left')
+    tracker.center_button("Utilities expenses",tracker.utilities,image=resizedArmor,compound="left")
+    tracker.center_button("Other expenses",tracker.other,image=resizedFire,compound="left")
+    tracker.center_button('Exit',root.destroy,image=resizedDoor,compound='left')
 
     
 
